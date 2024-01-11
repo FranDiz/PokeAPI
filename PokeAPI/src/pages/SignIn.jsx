@@ -7,7 +7,7 @@ const SignIn = () => {
     const [email, setEmail] = useState('');
     const [date, setDate] = useState('');
     const [errors, setErrors] = useState({});
-    const [userAdded, setUserAdded] = useState(false); // Variable de estado para controlar si el usuario ha sido añadido
+    const [userAdded, setUserAdded] = useState(false);
 
     const validateForm = () => {
         let errors = {};
@@ -41,17 +41,45 @@ const SignIn = () => {
         return Object.keys(errors).length === 0;
     };
 
+    const checkExistingUser = (username, password) => {
+        const users = Object.values(localStorage);
+        for (const user of users) {
+            const parsedUser = JSON.parse(user);
+            if (parsedUser.username === username && parsedUser.password === password && parsedUser.email === email)  {
+                errors.user = "User already exists"
+                setErrors(errors);
+                return false; // Usuario encontrado
+            }
+        }
+        return true; // Usuario no encontrado
+    };
+    
+    const generateId = () => {
+        const currentDate = new Date();
+        const id = currentDate.getTime().toString();
+        return id;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        setUserAdded(false); // Establecer la variable de estado a falso cada vez que se envíe el formulario
+        setUserAdded(false);
 
-        if (validateForm()) {
+        if (validateForm() && checkExistingUser(username, password, email)) {
+            const user = {
+                "username":username,
+                "password":password,
+                "email":email,
+                "date":date,
+                "data": "[]"
+            };
+            localStorage.setItem(generateId(), JSON.stringify(user));
+
             setUsername('');
             setPassword('');
             setConfirmPassword('');
             setEmail('');
             setDate('');
-            setUserAdded(true); // Establecer la variable de estado a verdadera si el formulario se valida correctamente
+            setUserAdded(true);
         }
     };
 
@@ -105,10 +133,12 @@ const SignIn = () => {
                 </div>
                 {errors.date && <span style={{ color: 'red' }}>{errors.date}</span>}
                 <button type="submit">Register</button>
-                {userAdded && <span style={{ color: 'green' }}>Usuario añadido</span>} {/* Mostrar la advertencia "Usuario añadido" si la variable de estado es verdadera */}
+                {userAdded && <span style={{ color: 'green' }}>User added</span>}
+                {errors.user && <span style={{ color: 'red' }}>{errors.user}</span>}
             </form>
         </div>
     );
+
 };
 
 export default SignIn;

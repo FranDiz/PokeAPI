@@ -4,7 +4,7 @@ import { Children } from "react";
 import Home from "../pages/Home.jsx";
 import Pokemons from "../pages/Pokemons.jsx";
 import SignIn from "../pages/SignIn.jsx";
-
+import LogIn from "../pages/LogIn.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -24,6 +24,11 @@ const router = createBrowserRouter([
                 path: "/signin",
                 index:true,
                 element: <SignIn />
+            },
+            {
+                path: "/login",
+                index:true,
+                element: <LogIn />
             }
         ]
     }
