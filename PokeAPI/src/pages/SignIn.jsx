@@ -26,7 +26,7 @@ const SignIn = () => {
         }
 
         if (password !== confirmPassword) {
-            errors.confirmPassword = 'Las contrseñas no coinciden';
+            errors.confirmPassword = 'Las contraseñas no coinciden';
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,9 +34,12 @@ const SignIn = () => {
             errors.email = 'Dirección de email inválida';
         }
 
-        const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // Update date format to YYYY-MM-DD
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
         if (!dateRegex.test(date)) {
-            errors.date = 'Formato de fecha inválido.'; // Update error message
+            errors.date = 'Formato de fecha inválido.';
+        }
+        if (gender==null){
+            errors.gender = 'Selecciona género'
         }
 
         setErrors(errors);
@@ -49,7 +52,7 @@ const SignIn = () => {
         for (const user of users) {
             const parsedUser = JSON.parse(user);
             if (parsedUser.username === username && parsedUser.password === password && parsedUser.email === email)  {
-                errors.user = "User already exists"
+                errors.user = "Ya existe este usuario"
                 setErrors(errors);
                 return false; // Usuario encontrado
             }
@@ -92,7 +95,7 @@ const SignIn = () => {
 
     return (
         <div>
-            <h2>Sign In</h2>
+            <h2>Crear cuenta</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Nombre:</label>
@@ -160,9 +163,10 @@ const SignIn = () => {
                             />
                         </label>
                     </fieldset>
+                    {errors.gender && <span style={{ color: 'red' }}>{errors.gender}</span>}
                 </div>
                 {errors.date && <span style={{ color: 'red' }}>{errors.date}</span>}
-                <button type="submit">Register</button>
+                <button type="submit">Registrarse</button>
                 {userAdded && <span style={{ color: 'green' }}>User added</span>}
                 {errors.user && <span style={{ color: 'red' }}>{errors.user}</span>}
             </form>

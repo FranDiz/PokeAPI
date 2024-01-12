@@ -5,31 +5,39 @@ import Home from "../pages/Home.jsx";
 import Pokemons from "../pages/Pokemons.jsx";
 import SignIn from "../pages/SignIn.jsx";
 import LogIn from "../pages/LogIn.jsx";
+import Error from "../pages/ErrorPage.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
         element: <LayoutRoot />,
+        errorElement:<Error/>,
         children: [
             {
-                path: "/",
-                index:true,
-                element: <Home />
-            },
-            {
-                path: "/pokemons",
-                index:true,
-                element: <Pokemons />
-            },
-            {
-                path: "/signin",
-                index:true,
-                element: <SignIn />
-            },
-            {
-                path: "/login",
-                index:true,
-                element: <LogIn />
+                errorElement:<Error/>,
+                children:[
+                    {
+                        path: "/",
+                        index:true,
+                        element: <Home />
+                    },
+                    {
+                        path: "/pokemons",
+                        index:true,
+                        element: <Pokemons />
+                    },
+                    {
+                        path: "/signin",
+                        index:true,
+                        element: <SignIn />
+                    },
+                    {
+                        path: "/login",
+                        index:true,
+                        element: <LogIn />
+                    }
+                ]
             }
+            
         ]
     }
 ])

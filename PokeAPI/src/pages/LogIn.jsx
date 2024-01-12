@@ -7,6 +7,7 @@ const LogIn = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [errors, setErrors] = useState({});
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -27,9 +28,12 @@ const LogIn = () => {
             const parsedUser = JSON.parse(user);
             if (parsedUser.username === username && parsedUser.password === password && parsedUser.email === email)  {
                 navigate("/pokemons");
+                setErrors({});
                 return true;
             }
         }
+        errors.LogIn = "Usuario no encontrado"
+        setErrors(errors);
         return false; // Usuario no encontrado
     }
 
@@ -41,7 +45,7 @@ const LogIn = () => {
 
     return (
         <div>
-            <h1>IniciarSesión</h1>
+            <h2>IniciarSesión</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     Nombre:
@@ -58,7 +62,8 @@ const LogIn = () => {
                     <input type="email" value={email} onChange={handleEmailChange} />
                 </label>
                 <br />
-                <button type="submit">LogIn</button>
+                <button type="submit">Entrar</button>
+                {errors.LogIn && <span style={{ color: 'red' }}>{errors.LogIn}</span>}
             </form>
         </div>
     );
