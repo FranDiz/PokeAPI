@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
     const [username, setUsername] = useState('');
@@ -6,34 +7,36 @@ const SignIn = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     const [date, setDate] = useState('');
+    const [gender, setGender] = useState(null);
     const [errors, setErrors] = useState({});
     const [userAdded, setUserAdded] = useState(false);
+    const navigate = useNavigate();
 
     const validateForm = () => {
         let errors = {};
 
         const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
         if (!usernameRegex.test(username)) {
-            errors.username = 'Username must be between 3 and 20 characters and can only contain letters, numbers, and underscores';
+            errors.username = 'Nombre entre 3-20 carácteres, contiene letras y números';
         }
 
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
         if (!passwordRegex.test(password)) {
-            errors.password = 'Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, and one digit';
+            errors.password = 'Contrasña mínimo 8 carácteres, debe tener una minúscula, una mayúscula y un número';
         }
 
         if (password !== confirmPassword) {
-            errors.confirmPassword = 'Passwords do not match';
+            errors.confirmPassword = 'Las contrseñas no coinciden';
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            errors.email = 'Invalid email address';
+            errors.email = 'Dirección de email inválida';
         }
 
-        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // Update date format to YYYY-MM-DD
         if (!dateRegex.test(date)) {
-            errors.date = 'Invalid date format. Please use YYYY-MM-DD';
+            errors.date = 'Formato de fecha inválido.'; // Update error message
         }
 
         setErrors(errors);
@@ -62,6 +65,7 @@ const SignIn = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(date)
         setUserAdded(false);
 
         if (validateForm() && checkExistingUser(username, password, email)) {
@@ -70,6 +74,7 @@ const SignIn = () => {
                 "password":password,
                 "email":email,
                 "date":date,
+                "gender":gender,
                 "data": "[]"
             };
             localStorage.setItem(generateId(), JSON.stringify(user));
@@ -80,6 +85,8 @@ const SignIn = () => {
             setEmail('');
             setDate('');
             setUserAdded(true);
+            setGender(null)
+            navigate('/login');
         }
     };
 
@@ -88,7 +95,7 @@ const SignIn = () => {
             <h2>Sign In</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Username:</label>
+                    <label>Nombre:</label>
                     <input
                         type="text"
                         value={username}
@@ -97,7 +104,7 @@ const SignIn = () => {
                 </div>
                 {errors.username && <span style={{ color: 'red' }}>{errors.username}</span>}
                 <div>
-                    <label>Password:</label>
+                    <label>Contraseña:</label>
                     <input
                         type="password"
                         value={password}
@@ -106,7 +113,7 @@ const SignIn = () => {
                 </div>
                 {errors.password && <span style={{ color: 'red' }}>{errors.password}</span>}
                 <div>
-                    <label>Confirm Password:</label>
+                    <label>Repite la contraseña:</label>
                     <input
                         type="password"
                         value={confirmPassword}
@@ -124,12 +131,35 @@ const SignIn = () => {
                 </div>
                 {errors.email && <span style={{ color: 'red' }}>{errors.email}</span>}
                 <div>
-                    <label>Date:</label>
+                    <label>Fecha de nacimiento:</label>
                     <input
-                        type="text"
+                        type="date" // Cambio el tipo de entrada a "date"
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
                     />
+                </div>
+                <div>
+                    <fieldset>
+                        <legend>Género:</legend>
+                        <label>
+                            Masculino
+                            <input
+                                type="radio"
+                                value="Masculino"
+                                checked={gender === true}
+                                onChange={() => setGender(true)}
+                            />
+                        </label>
+                        <label>
+                            Femenino
+                            <input
+                                type="radio"
+                                value="Femenino"
+                                checked={gender === false}
+                                onChange={() => setGender(false)}
+                            />
+                        </label>
+                    </fieldset>
                 </div>
                 {errors.date && <span style={{ color: 'red' }}>{errors.date}</span>}
                 <button type="submit">Register</button>

@@ -1,18 +1,42 @@
-import React from "react";
-import {NavLink} from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
+import { React, useContext } from "react";
+import { UserContext } from "../context/UserContext.jsx";
 
 const Navbar = () => {
+    const { user, setUser } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    const logOut = () => {
+        setUser(!user);
+        navigate("/");
+    };
+
+    const logIn = () => {
+        navigate("/login");
+    };
+
     return (
         <div>
             <img src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png" alt="PokeAPI logo" />
-        <nav>
-            <NavLink to="/">Home </NavLink>
-            <NavLink to="/pokemons">Pokemons </NavLink>
-            <NavLink to="/signin">SignIn </NavLink>
-            <NavLink to="/login">LogIn</NavLink>
-        </nav>
-        </div>
-    )
-}
+            <nav>
+                <NavLink to="/">Inicio </NavLink>
+                {user ? (
+                    <>
+                        <NavLink to="/pokemons">Pokemons </NavLink>
+                        <button onClick={logOut}>CerrarSesión</button>
+                        <img src="https://cdn-icons-png.flaticon.com/512/6073/6073873.png" alt="User icon" style={{ width: '50px' }} />
+                    </>
+                ) : (
+                    <>
+                        <NavLink to="/signin">Registrarse </NavLink>
+                        <button onClick={logIn}>IniciarSesión</button>
+                    </>
+                )}
 
-export default Navbar
+                
+            </nav>
+        </div>
+    );
+};
+
+export default Navbar;
