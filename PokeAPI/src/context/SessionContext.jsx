@@ -22,7 +22,7 @@ export const SessionProvider = ({ children }) => {
     };
 
     return (
-        <SessionContext.Provider value={contextValue}>
+        <SessionContext.Provider value={{contextValue}}>
             {children}
         </SessionContext.Provider>
     );
