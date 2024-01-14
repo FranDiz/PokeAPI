@@ -1,16 +1,36 @@
-
-import React, { useContext } from "react";
-import { PokemonContext } from "../context/PokemonContext.jsx";
+import React, { useEffect, useState } from "react";
+import PokemonCard from "../components/PokemonCard.jsx";
+import PokemonList from "../components/PokemonList.jsx";
 
 const Pokemons = () => {
-    const { getPokemon } = useContext(PokemonContext)
-    const bulbasaur = getPokemon(1)
+    const [pokemons, setPokemons] = useState([]);
+    const [pokemonAmount, setPokemonAmount] = useState(0);
+
+    const getPokemons = async (pokemonAmount) => {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=50&offset=${pokemonAmount}`);
+        const data = await res.json();
+        setPokemons((prevPokemons) => [...prevPokemons, ...data.results]);
+        console.log(data.results);
+        console.log(pokemons[0].url);
+    };
+
+    const morePokemonAmount = () => {
+        setPokemonAmount(pokemonAmount + 50);
+    }
+
+    useEffect(() => {
+        getPokemons(pokemonAmount);
+    }, [pokemonAmount]);
+
     return (
         <div>
             <h1>Pokemons</h1>
-            <p>Pokemon with id 1: {bulbasaur.name}</p>
+            <div>
+                <PokemonList pokemonArray={pokemons} />
+                <button onClick={morePokemonAmount}>Cargar más</button>
+            </div>
         </div>
     );
-}
+};
 
-export default Pokemons
+export default Pokemons;
