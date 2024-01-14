@@ -23,15 +23,19 @@ const PokemonCard = ({ url }) => {
         return <p>Loading...</p>;
     }
 
-    const { name, sprites, types } = pokemonData;
+    const { name, sprites, types, id } = pokemonData;
 
     return (
         <div className="pokemon-card">
             <img src={sprites.front_default} alt={name} />
-            <h3>{name}</h3>
+            <div>
+                <h3>{name}</h3>
+                <h3>{id}</h3>
+            </div>
+            
             <div className="pokemon-types">
                 {types.map((type, index) => (
-                    <span key={index} className="type">{type.type.name}</span>
+                    <span key={index} className={type.type.name}>{type.type.name}</span>
                 ))}
                 <button>👍</button>
             </div>

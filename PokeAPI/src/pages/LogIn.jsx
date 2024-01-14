@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { UserContext } from '../context/UserContext.jsx';
+import { SessionContext } from '../context/SessionContext.jsx';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +10,7 @@ const LogIn = () => {
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState({});
     const { user, setUser } = useContext(UserContext);
+    const { session, setSession } = useContext(SessionContext);
     const navigate = useNavigate();
 
     const handleUsernameChange = (e) => {
@@ -34,13 +36,23 @@ const LogIn = () => {
         }
         errors.LogIn = "Usuario no encontrado"
         setErrors(errors);
-        return false; // Usuario no encontrado
+        return false;
     }
 
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        setUser(userLogIn());
+        const users = Object.values(localStorage);
+        for (const user of users) {
+            const parsedUser = JSON.parse(user);
+            if (parsedUser.username === username && parsedUser.password === password && parsedUser.email === email)  {
+                setSession(parsedUser);
+                setUser(true);
+                navigate("/pokemons");
+                return;
+            }
+        }
+        setErrors({ LogIn: "Usuario no encontrado" });
     }
 
     return (
@@ -62,7 +74,7 @@ const LogIn = () => {
                     <input type="email" value={email} onChange={handleEmailChange} />
                 </label>
                 <br />
-                <button type="submit">Entrar</button>
+                <button type="submit" onSubmit={handleSubmit}>Entrar</button>
                 {errors.LogIn && <span style={{ color: 'red' }}>{errors.LogIn}</span>}
             </form>
         </div>

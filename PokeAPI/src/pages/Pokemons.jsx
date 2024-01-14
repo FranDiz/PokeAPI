@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PokemonCard from "../components/PokemonCard.jsx";
 import PokemonList from "../components/PokemonList.jsx";
+import Filterbar from "../components/Filterbar.jsx";
 
 const Pokemons = () => {
     const [pokemons, setPokemons] = useState([]);
@@ -24,6 +25,7 @@ const Pokemons = () => {
 
     return (
         <div>
+            <Filterbar />
             <h1>Pokemons</h1>
             <div>
                 <PokemonList pokemonArray={pokemons} />
