@@ -6,6 +6,7 @@ import Pokemons from "../pages/Pokemons.jsx";
 import SignIn from "../pages/SignIn.jsx";
 import LogIn from "../pages/LogIn.jsx";
 import Error from "../pages/ErrorPage.jsx";
+import PokemonData from "../pages/PokemonData.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
                         path: "/login",
                         index:true,
                         element: <LogIn />
+                    },
+                    {
+                        path: "/pokemondata",
+                        index:true,
+                        element: <PokemonData />
                     }
                 ]
             }

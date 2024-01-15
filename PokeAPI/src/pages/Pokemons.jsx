@@ -3,6 +3,7 @@ import PokemonCard from "../components/PokemonCard.jsx";
 import PokemonList from "../components/PokemonList.jsx";
 import Filterbar from "../components/Filterbar.jsx";
 
+
 const Pokemons = () => {
     const [pokemons, setPokemons] = useState([]);
     const [pokemonAmount, setPokemonAmount] = useState(0);

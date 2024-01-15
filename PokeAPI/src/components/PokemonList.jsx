@@ -5,10 +5,10 @@ import PokemonCard from './PokemonCard.jsx';
 
 const PokemonList = ({ pokemonArray }) => {
     return (
-        <div className="pokemon-list"> {/* Apply a CSS class for the container */}
-            <div className="pokemon-row"> {/* Apply a CSS class for each row */}
+        <div className="pokemon-list">
+            <div className="pokemon-row">
                 {pokemonArray.map((pokemon, index) => (
-                    <div key={index} className="pokemon-card"> {/* Apply a CSS class for each pokemon */}
+                    <div key={index} className="pokemon-card">
                         <PokemonCard url={pokemon.url} />
                     </div>
                 ))}
