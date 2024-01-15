@@ -1,6 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
+
+
+
+
 
 const PokemonCard = ({ url }) => {
     const [pokemonData, setPokemonData] = useState(null);
@@ -11,7 +16,7 @@ const PokemonCard = ({ url }) => {
             const data = await response.json();
             setPokemonData(data);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            console.error('Eror al obtener los datos', error);
         }
     };
 
@@ -38,6 +43,9 @@ const PokemonCard = ({ url }) => {
                     <span key={index} className={type.type.name}>{type.type.name}</span>
                 ))}
                 <button>👍</button>
+            </div>
+            <div>
+                <NavLink to={`/pokemon/${id}`}>Ver detalles</NavLink>
             </div>
         </div>
     );

@@ -11,12 +11,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
   <UserProvider>
     <SessionProvider>
-
       <React.StrictMode>
       <RouterProvider router={router} />
       </React.StrictMode>
-
     </SessionProvider>
   </UserProvider>
 
 )
+  

@@ -1,3 +1,5 @@
+/*
+
 import React, { useState } from 'react';
 
 const Filterbar = () => {
@@ -188,3 +190,5 @@ const Filterbar = () => {
 };
 
 export default Filterbar;
+
+*/

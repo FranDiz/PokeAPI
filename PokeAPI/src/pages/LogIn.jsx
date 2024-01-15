@@ -10,7 +10,6 @@ const LogIn = () => {
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState({});
     const { user, setUser } = useContext(UserContext);
-    const { session, setSession } = useContext(SessionContext);
     const navigate = useNavigate();
 
     const handleUsernameChange = (e) => {
@@ -24,21 +23,6 @@ const LogIn = () => {
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     }
-    const userLogIn = () => {
-        const users = Object.values(localStorage);
-        for (const user of users) {
-            const parsedUser = JSON.parse(user);
-            if (parsedUser.username === username && parsedUser.password === password && parsedUser.email === email)  {
-                navigate("/pokemons");
-                setErrors({});
-                return true;
-            }
-        }
-        errors.LogIn = "Usuario no encontrado"
-        setErrors(errors);
-        return false;
-    }
-
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,7 +30,6 @@ const LogIn = () => {
         for (const user of users) {
             const parsedUser = JSON.parse(user);
             if (parsedUser.username === username && parsedUser.password === password && parsedUser.email === email)  {
-                setSession(parsedUser);
                 setUser(true);
                 navigate("/pokemons");
                 return;
