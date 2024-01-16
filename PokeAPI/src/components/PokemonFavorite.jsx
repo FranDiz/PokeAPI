@@ -33,7 +33,7 @@ const PokemonFavorite = ({ url }) => {
 
     //Agrega un pokemon al equipo
     const addTeam = () => {
-        if (session.data.team.includes(id)) {
+        if (session.data.team.includes(id) || session.data.team.length >= 6) {
             return;
         }
         session.data.team.push(id);
