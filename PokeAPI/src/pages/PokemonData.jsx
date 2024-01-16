@@ -34,7 +34,7 @@ const PokemonData = () => {
                         
                 </div>
             ) : (
-                <p>Loading...</p>
+                <p>Cargando...</p>
             )}
         </div>
     );

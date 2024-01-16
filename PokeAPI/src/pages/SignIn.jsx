@@ -78,7 +78,10 @@ const SignIn = () => {
                 "email":email,
                 "date":date,
                 "gender":gender,
-                "data": "{}"
+                "data": {
+                    "favorites": [],
+                    "team": [],
+                }
             };
             localStorage.setItem(generateId(), JSON.stringify(user));
 
@@ -136,7 +139,7 @@ const SignIn = () => {
                 <div>
                     <label>Fecha de nacimiento:</label>
                     <input
-                        type="date" // Cambio el tipo de entrada a "date"
+                        type="date"
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
                     />

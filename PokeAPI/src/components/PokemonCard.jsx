@@ -1,7 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { SessionContext } from '../context/SessionContext';
 
 
 
@@ -9,6 +11,7 @@ import { NavLink } from 'react-router-dom';
 
 const PokemonCard = ({ url }) => {
     const [pokemonData, setPokemonData] = useState(null);
+    const { session, setSession, saveSession } = useContext(SessionContext);
 
     const fetchData = async () => {
         try {
@@ -19,6 +22,13 @@ const PokemonCard = ({ url }) => {
             console.error('Eror al obtener los datos', error);
         }
     };
+
+    const addFavourite = () => {
+        session.data.favorites.push(id);
+        saveSession();
+    }
+
+    
 
     useEffect(() => {
         fetchData(url);
@@ -42,7 +52,7 @@ const PokemonCard = ({ url }) => {
                 {types.map((type, index) => (
                     <span key={index} className={type.type.name}>{type.type.name}</span>
                 ))}
-                <button>👍</button>
+                <button onClick={addFavourite}>👍</button>
             </div>
             <div>
                 <NavLink to={`/pokemon/${id}`}>Ver detalles</NavLink>

@@ -20,7 +20,6 @@ const Pokemons = () => {
     }
 
     useEffect(() => {   
-        console.log(session);
         getPokemons(pokemonAmount);
     }, [pokemonAmount]);
 

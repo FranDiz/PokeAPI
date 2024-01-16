@@ -7,7 +7,11 @@ const Navbar = () => {
     const { user, setUser } = useContext(UserContext);
     const {logout, session} = useContext(SessionContext);
     const navigate = useNavigate();
-    
+
+    const sesion = () => {
+        console.log(session)
+    }
+
     const logOut = () => {
         setUser(!user);
         logout();
@@ -29,6 +33,7 @@ const Navbar = () => {
                         <NavLink to="/pokemons">Pokemons </NavLink>
                         <NavLink to="/profile">Perfil</NavLink>
                         <button onClick={logOut}>CerrarSesión</button>
+                        <button onClick={sesion}>Sesion</button>
                         
                     </>
                 ) : (

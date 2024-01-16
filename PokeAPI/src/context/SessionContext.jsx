@@ -15,10 +15,20 @@ export const SessionProvider = ({ children }) => {
         setSession(null);
         console.log(session)
     };
-    
+
+    const saveSession = () => {
+        const users = Object.values(localStorage);
+        for (const user of users) {
+            const parsedUser = JSON.parse(user);
+            if (parsedUser.username === session.username && parsedUser.password === session.password && parsedUser.email === session.email){
+                localStorage.setItem(parsedUser.id, JSON.stringify(session));
+                return;
+            }
+        }
+}
 
     return (
-        <SessionContext.Provider value={{login, logout, session, setSession}}>
+        <SessionContext.Provider value={{login, logout, session, setSession, saveSession}}>
             {children}
         </SessionContext.Provider>
     );
