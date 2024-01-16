@@ -10,6 +10,7 @@ const LogIn = () => {
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState({});
     const { user, setUser } = useContext(UserContext);
+    const {login} = useContext(SessionContext);
     const navigate = useNavigate();
 
     const handleUsernameChange = (e) => {
@@ -31,6 +32,7 @@ const LogIn = () => {
             const parsedUser = JSON.parse(user);
             if (parsedUser.username === username && parsedUser.password === password && parsedUser.email === email)  {
                 setUser(true);
+                login(parsedUser);
                 navigate("/pokemons");
                 return;
             }

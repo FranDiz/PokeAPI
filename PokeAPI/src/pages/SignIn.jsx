@@ -78,7 +78,7 @@ const SignIn = () => {
                 "email":email,
                 "date":date,
                 "gender":gender,
-                "data": "[]"
+                "data": "{}"
             };
             localStorage.setItem(generateId(), JSON.stringify(user));
 

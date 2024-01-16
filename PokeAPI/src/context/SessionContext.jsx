@@ -13,16 +13,12 @@ export const SessionProvider = ({ children }) => {
 
     const logout = () => {
         setSession(null);
+        console.log(session)
     };
-
-    const contextValue = {
-        session,
-        login,
-        logout,
-    };
+    
 
     return (
-        <SessionContext.Provider value={{contextValue}}>
+        <SessionContext.Provider value={{login, logout, session, setSession}}>
             {children}
         </SessionContext.Provider>
     );
