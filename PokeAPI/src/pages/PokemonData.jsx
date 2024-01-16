@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
 
+//Muestra de forma detallada los datos de un pokemon
+
 const PokemonData = () => {
     const { id } = useParams();
     const [pokemon, setPokemon] = useState(null);

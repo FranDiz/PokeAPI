@@ -12,6 +12,8 @@ const Navbar = () => {
         console.log(session)
     }
 
+
+    //Cambiar el estado de user a false y cerrar sesion
     const logOut = () => {
         setUser(!user);
         logout();

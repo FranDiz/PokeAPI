@@ -8,7 +8,7 @@ import { SessionContext } from '../context/SessionContext';
 
 
 
-
+//Muestra los datos de un pokemon desde el equipo
 const PokemonTeam = ({ url }) => {
     const [pokemonData, setPokemonData] = useState(null);
     const { session, setSession, saveSession } = useContext(SessionContext);
@@ -23,6 +23,7 @@ const PokemonTeam = ({ url }) => {
         }
     };
 
+    //Elimina un pokemon del equipo
     const deleteTeam = () => {
         const index = session.data.team.indexOf(id);
         if (index !== -1) {
