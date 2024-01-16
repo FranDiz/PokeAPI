@@ -28,6 +28,7 @@ const Navbar = () => {
             <img src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png" alt="PokeAPI logo" />
             <nav>
                 <NavLink to="/">Inicio </NavLink>
+                <NavLink to="/contact">Contacto </NavLink>
                 {user ? (
                     <>
                         <NavLink to="/pokemons">Pokemons </NavLink>

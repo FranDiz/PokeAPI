@@ -1,13 +1,10 @@
 import React from 'react';
+import { useContext } from 'react';
+import { SessionContext } from '../context/SessionContext.jsx';
+import { UserContext } from '../context/UserContext.jsx';
 
 const Perfil = () => {
-    // Obtener la información del usuario en sesión
-    const usuario = {
-        nombre: 'John Doe',
-        email: 'johndoe@example.com',
-        favoritos: ['Pikachu', 'Charizard', 'Bulbasaur']
-    };
-
+    // Obtener la información del usuario en sesi
     return (
         <div>
             <h1>Perfil de {usuario.nombre}</h1>
