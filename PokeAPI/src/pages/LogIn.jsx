@@ -3,6 +3,7 @@ import { UserContext } from '../context/UserContext.jsx';
 import { SessionContext } from '../context/SessionContext.jsx';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Timer from '../components/Timer.jsx';
 
 const LogIn = () => {
     const [username, setUsername] = useState('');
@@ -62,6 +63,7 @@ const LogIn = () => {
                 <button type="submit" onSubmit={handleSubmit}>Entrar</button>
                 {errors.LogIn && <span style={{ color: 'red' }}>{errors.LogIn}</span>}
             </form>
+            <Timer />
         </div>
     );
 };

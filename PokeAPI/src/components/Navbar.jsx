@@ -36,7 +36,6 @@ const Navbar = () => {
                         <NavLink to="/pokemons">Pokemons </NavLink>
                         <NavLink to="/profile">Perfil</NavLink>
                         <button onClick={logOut}>CerrarSesión</button>
-                        <button onClick={sesion}>Sesion</button>
                         
                     </>
                 ) : (
