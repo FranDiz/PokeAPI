@@ -26,7 +26,10 @@ const PokemonCard = ({ url }) => {
 
     //Agrega un pokemon a favoritos en el local storage
     const addFavourite = () => {
-        session.data.favorites.push(id);
+        const updatedSession = { ...session };
+        updatedSession.data.favorites.push(id);
+        setSession(updatedSession);
+        console.log(session)
         saveSession();
     }
 

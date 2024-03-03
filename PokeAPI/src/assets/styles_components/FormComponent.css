@@ -1,0 +1,33 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    font-size: 1.4em;
+}
+
+.form-container label {
+    margin-bottom: 10px;
+    
+}
+
+.form-container input,
+.form-container textarea,
+.form-container select {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+.form-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.form-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
