@@ -4,6 +4,7 @@ import { SessionContext } from '../context/SessionContext.jsx';
 import { UserContext } from '../context/UserContext.jsx';
 import PokemonTeam from '../components/PokemonTeam.jsx';
 import PokemonFavorite from '../components/PokemonFavorite.jsx';
+import '../assets/styles_components/PokemonFavorites.css';
 
 
 const Perfil = () => {
@@ -12,16 +13,16 @@ const Perfil = () => {
     return (
         <div>
             <h1>Perfil de {session.username}</h1>
-            <div>
-                <h2>Equipo Pokemon:</h2>
+            <h2>Equipo Pokemon:</h2>
+            <div className='pokemon-team'>
                 {session.data.team.map((pokemon, index) => (
                     <PokemonTeam key={index} url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} />
                 ))}
             </div>
-            <div>
-                <h2>Pokemons favoritos:</h2>
+            <h2>Pokemons favoritos:</h2>
+            <div className='pokemon-favorites'>
                 {session.data.favorites.map((pokemon, index) => (
-                    <PokemonFavorite key={index} url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} />
+                    <PokemonFavorite  key={index} url={`https://pokeapi.co/api/v2/pokemon/${pokemon}`} />
                 ))}
             </div>
         </div>

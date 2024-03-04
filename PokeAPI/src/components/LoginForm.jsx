@@ -8,7 +8,6 @@ import '../assets/styles_components/FormComponent.css';
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
     const [errors, setErrors] = useState({});
     const { user, setUser } = useContext(UserContext);
     const {login} = useContext(SessionContext);
@@ -21,17 +20,13 @@ const LoginForm = () => {
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     }
-
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    }
     
     const handleSubmit = (e) => {
         e.preventDefault();
         const users = Object.values(localStorage);
         for (const user of users) {
             const parsedUser = JSON.parse(user);
-            if (parsedUser.username === username && parsedUser.password === password && parsedUser.email === email)  {
+            if (parsedUser.username === username && parsedUser.password === password)  {
                 setUser(true);
                 login(parsedUser);
                 navigate("/pokemons");
@@ -52,11 +47,6 @@ const LoginForm = () => {
                 <label>
                     Contraseña:
                     <input type="password" value={password} onChange={handlePasswordChange} />
-                </label>
-                <br />
-                <label>
-                    Email:
-                    <input type="email" value={email} onChange={handleEmailChange} />
                 </label>
                 <br />
                 <button type="submit" onSubmit={handleSubmit}>Entrar</button>

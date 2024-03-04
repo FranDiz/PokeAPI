@@ -8,16 +8,10 @@ const Navbar = () => {
     const {logout, session} = useContext(SessionContext);
     const navigate = useNavigate();
 
-    const sesion = () => {
-        console.log(session)
-    }
-
-
     //Cambiar el estado de user a false y cerrar sesion
     const logOut = () => {
         setUser(!user);
         logout();
-        console.log(session)
         navigate("/");
     };  
 
@@ -30,7 +24,7 @@ const Navbar = () => {
             <img src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png" alt="PokeAPI logo" />
             <nav>
                 <NavLink to="/">Inicio </NavLink>
-                <NavLink to="/contact">Contacto </NavLink>
+                <NavLink to="/contact">Contacto</NavLink>
                 {user ? (
                     <>
                         <NavLink to="/pokemons">Pokemons </NavLink>
