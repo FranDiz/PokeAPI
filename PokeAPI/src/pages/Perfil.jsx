@@ -5,13 +5,15 @@ import { UserContext } from '../context/UserContext.jsx';
 import PokemonTeam from '../components/PokemonTeam.jsx';
 import PokemonFavorite from '../components/PokemonFavorite.jsx';
 import '../assets/styles_components/PokemonFavorites.css';
+import Navbar from "../components/Navbar.jsx";
 
 
 const Perfil = () => {
     const { session } = useContext(SessionContext);
 
     return (
-        <div>
+        <div className='page___main'>
+            <Navbar className="header___page"/>
             <h1>Perfil de {session.username}</h1>
             <h2>Equipo Pokemon:</h2>
             <div className='pokemon-team'>

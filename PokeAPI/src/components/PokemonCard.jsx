@@ -5,10 +5,6 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { SessionContext } from '../context/SessionContext';
 
-
-
-
-
 const PokemonCard = ({ url }) => {
     const [pokemonData, setPokemonData] = useState(null);
     const { session, setSession, saveSession } = useContext(SessionContext);
@@ -19,21 +15,27 @@ const PokemonCard = ({ url }) => {
             const data = await response.json();
             setPokemonData(data);
         } catch (error) {
-            console.error('Eror al obtener los datos', error);
+            console.error('Error al obtener los datos', error);
         }
     };
 
-
-    //Agrega un pokemon a favoritos en el local storage
     const addFavourite = () => {
         const updatedSession = { ...session };
-        updatedSession.data.favorites.push(id);
-        setSession(updatedSession);
-        console.log(session)
-        saveSession();
-    }
+        const favorites = updatedSession.data.favorites;
+        const id = pokemonData.id;
 
-    
+        if (favorites.includes(id)) {
+            // Pokemon is already a favorite, remove it
+            const index = favorites.indexOf(id);
+            favorites.splice(index, 1);
+        } else {
+            // Pokemon is not a favorite, add it
+            favorites.push(id);
+        }
+
+        setSession(updatedSession);
+        saveSession();
+    };
 
     useEffect(() => {
         fetchData(url);
@@ -44,6 +46,7 @@ const PokemonCard = ({ url }) => {
     }
 
     const { name, sprites, types, id } = pokemonData;
+    const isFavorite = session.data.favorites.includes(id);
 
     return (
         <div className="pokemon-card">
@@ -57,7 +60,9 @@ const PokemonCard = ({ url }) => {
                 {types.map((type, index) => (
                     <span key={index} className={type.type.name}>{type.type.name}</span>
                 ))}
-                <button onClick={addFavourite}>👍</button>
+                <button onClick={addFavourite}>
+                    {isFavorite ? 'Eliminar favorito' : 'Añadir favorito'}
+                </button>
             </div>
             <div>
                 <NavLink to={`/pokemon/${id}`}>Ver detalles</NavLink>

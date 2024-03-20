@@ -2,11 +2,31 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .search-bar {
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-bottom: 20px; 
+    padding: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 20px; 
+    background-color: #f9f9f9; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    width: 100%; 
+    max-width: 500px; 
 }
+
+.search-bar input[type="text"] {
+    border: none; 
+    outline: none; 
+    padding: 10px; 
+    width: 100%; 
+    border-radius: 20px;
+    background-color: transparent; 
+}   
 
 .pokemon-row {
     display: flex;
@@ -16,7 +36,7 @@
 }
 
 .pokemon-card {
-    flex: 1 0 200px; /* Tamaño mínimo de 200px */
+    flex: 1 0 200px;
 }
 
 .load-more-btn {

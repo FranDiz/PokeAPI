@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
-import PokemonCard from "../components/PokemonCard.jsx";
+import React from "react";
 import PokemonList from "../components/PokemonList.jsx";
-
+import '../assets/styles_components/PokemonList.css';
+import Navbar from "../components/Navbar.jsx";
 
 const Pokemons = () => {
    
 
     return (
-        <div>
+        <div className='page___main'>
+            <Navbar className="header___page"/>
             <h1>Pokemons</h1>
-            <PokemonList />
+            <PokemonList className='page___main'/>
         </div>
     );
 };

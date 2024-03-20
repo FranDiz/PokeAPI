@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
+import Navbar from "../components/Navbar.jsx";
 
 //Muestra de forma detallada los datos de un pokemon
 
@@ -19,7 +20,8 @@ const PokemonData = () => {
     }, [id]);
 
     return (
-        <div>
+        <div className='page___main'>
+            <Navbar className="header___page"/>
             {pokemon ? (
                 <div>
                     <h1>{pokemon.name}</h1>

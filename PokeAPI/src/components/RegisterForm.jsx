@@ -17,14 +17,18 @@ const RegisterForm = () => {
     const { user, setUser } = useContext(UserContext);
     const {login} = useContext(SessionContext);
     const navigate = useNavigate();
+    let formIsValid = false;
 
+
+    
     const validateUsername = () => {
         const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
         if (!usernameRegex.test(username)) {
             setErrors((prevErrors) => ({
                 ...prevErrors,
-                username: 'Nombre entre 3-20 caracteres, contiene letras y números',
+                username: 'Nombre entre 3-20 caracteres',
             }));
+            formIsValid = false;
         } else {
             setErrors((prevErrors) => ({
                 ...prevErrors,
@@ -34,12 +38,13 @@ const RegisterForm = () => {
     };
 
     const validatePassword = () => {
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        const passwordRegex = /^[a-zA-Z0-9_]{8,20}$/;
         if (!passwordRegex.test(password)) {
             setErrors((prevErrors) => ({
                 ...prevErrors,
-                password: 'Contraseña mínimo 8 caracteres, debe tener una minúscula, una mayúscula y un número',
+                password: 'Contraseña mínimo 8 caracteres',
             }));
+            formIsValid = false;
         } else {
             setErrors((prevErrors) => ({
                 ...prevErrors,
@@ -54,6 +59,7 @@ const RegisterForm = () => {
                 ...prevErrors,
                 confirmPassword: 'Las contraseñas no coinciden',
             }));
+            formIsValid = false;
         } else {
             setErrors((prevErrors) => ({
                 ...prevErrors,
@@ -69,11 +75,13 @@ const RegisterForm = () => {
                 ...prevErrors,
                 email: 'Dirección de email inválida',
             }));
+            formIsValid = false;
         } else {
             setErrors((prevErrors) => ({
                 ...prevErrors,
                 email: '',
             }));
+            
         }
     };
 
@@ -84,6 +92,7 @@ const RegisterForm = () => {
                 ...prevErrors,
                 date: 'Formato de fecha inválido.',
             }));
+            formIsValid = false;
         } else {
             setErrors((prevErrors) => ({
                 ...prevErrors,
@@ -98,6 +107,7 @@ const RegisterForm = () => {
                 ...prevErrors,
                 gender: 'Selecciona género',
             }));
+            formIsValid = false;
         } else {
             setErrors((prevErrors) => ({
                 ...prevErrors,
@@ -107,6 +117,7 @@ const RegisterForm = () => {
     };
 
     const validateForm = () => {
+        formIsValid = true
         validateUsername();
         validatePassword();
         validateConfirmPassword();
@@ -114,7 +125,7 @@ const RegisterForm = () => {
         validateDate();
         validateGender();
 
-        return Object.keys(errors).length === 0;
+        return formIsValid;
     };
 
     const checkExistingUser = (username, password, email) => {
@@ -141,9 +152,9 @@ const RegisterForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setUserAdded(false);
-        console.log(username)
+        console.log(errors.username)
     
-        if (!validateForm() && checkExistingUser(username, password, email)) {
+        if (validateForm() && checkExistingUser(username, password, email)) {
             const user = {
                 username: username,
                 password: password,
@@ -168,7 +179,8 @@ const RegisterForm = () => {
             navigate("/pokemons");
         }
     };
-    const isFormValid = Object.values(errors).every((error) => error === '');
+
+    
 
     return (
         <form className="form-container" onSubmit={handleSubmit}>
@@ -232,7 +244,7 @@ const RegisterForm = () => {
             </fieldset>
             {errors.gender && <span style={{ color: 'red' }}>{errors.gender}</span>}
 
-            <button type="submit" disabled={!isFormValid} onClick={handleSubmit}>
+            <button type="submit"  onClick={handleSubmit}>
                 Registrarse
             </button>
             {errors.user && <span style={{ color: 'red' }}>{errors.user}</span>}
