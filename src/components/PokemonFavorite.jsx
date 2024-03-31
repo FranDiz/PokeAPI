@@ -24,10 +24,14 @@ const PokemonFavorite = ({ url }) => {
     };
     //Elimina un pokemon de favoritos
     const deleteFavourite = () => {
-        const index = session.data.favorites.indexOf(id);
-        if (index !== -1) {
-            session.data.favorites.splice(index, 1);
-        }
+        const newFavorites = session.data.favorites.filter(favoriteId => favoriteId !== id);
+        setSession(prevSession => ({
+            ...prevSession,
+            data: {
+                ...prevSession.data,
+                favorites: newFavorites
+            }
+        }));
         saveSession();
     }
 
@@ -36,10 +40,16 @@ const PokemonFavorite = ({ url }) => {
         if (session.data.team.includes(id) || session.data.team.length >= 6) {
             return;
         }
-        session.data.team.push(id);
+        const newTeam = [...session.data.team, id];
+        setSession(prevSession => ({
+            ...prevSession,
+            data: {
+                ...prevSession.data,
+                team: newTeam
+            }
+        }));
         saveSession();
     }
-
     
 
     useEffect(() => {

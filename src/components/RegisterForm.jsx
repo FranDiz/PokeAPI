@@ -179,7 +179,7 @@ const RegisterForm = () => {
             navigate("/pokemons");
         }
     };
-
+    
     
 
     return (
@@ -244,7 +244,7 @@ const RegisterForm = () => {
             </fieldset>
             {errors.gender && <span style={{ color: 'red' }}>{errors.gender}</span>}
 
-            <button type="submit"  onClick={handleSubmit}>
+            <button  type="submit"  onClick={handleSubmit}>
                 Registrarse
             </button>
             {errors.user && <span style={{ color: 'red' }}>{errors.user}</span>}

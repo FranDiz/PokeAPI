@@ -25,10 +25,14 @@ const PokemonTeam = ({ url }) => {
 
     //Elimina un pokemon del equipo
     const deleteTeam = () => {
-        const index = session.data.team.indexOf(id);
-        if (index !== -1) {
-            session.data.team.splice(index, 1);
-        }
+        const newTeam = session.data.team.filter(teamId => teamId !== id);
+        setSession(prevSession => ({
+            ...prevSession,
+            data: {
+                ...prevSession.data,
+                team: newTeam
+            }
+        }));
         saveSession();
     }
 

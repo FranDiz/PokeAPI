@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../assets/styles_components/FormComponent.css';
 
+
+//Inputs reactivos
 const ContactForm = () => {
     const [categoria, setCategoria] = useState('');
     const [asunto, setAsunto] = useState('');
@@ -28,6 +30,8 @@ const ContactForm = () => {
         return correo.match(emailRegex) && asunto && descripcion;
     };
 
+
+//Contenido HTML devuelto
     return (
         <form className="form-container">
                 <label htmlFor="categoria">Categoría:
