@@ -29,6 +29,8 @@ const router = createBrowserRouter([
                         index:true,
                         element:<Contacto/>
                     },
+                
+            
                     {
                         path: "/pokemons",
                         index:true,
