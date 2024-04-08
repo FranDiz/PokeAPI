@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import LayoutRoot from "../layouts/LayoutRoot.jsx";
+import LayoutPrivate from "../layouts/LayoutPrivate.jsx"
 import { Children } from "react";
 import Home from "../pages/Home.jsx";
 import Pokemons from "../pages/Pokemons.jsx";
@@ -17,50 +18,50 @@ const router = createBrowserRouter([
         errorElement:<Error/>,
         children: [
             {
-                errorElement:<Error/>,
-                children:[
-                    {
-                        path: "/",
-                        index:true,
-                        element: <Home />
-                    },
-                    {
-                        path: "/contact",
-                        index:true,
-                        element:<Contacto/>
-                    },
-                
+                path: "/", // Home route
+                index: true,
+                element: <Home />,
+                errorElement:<Error/>
+            },
+            {
+                path: "/contact",
+                element:<Contacto/>,
+                errorElement:<Error/>
+            },
             
+            {
+                path: "/signin",
+                element: <SignIn />,
+                errorElement:<Error/>
+            },
+            {
+                path: "/login",
+                element: <LogIn />,
+                errorElement:<Error/>
+            },
+            {
+                path: "/", 
+                element: <LayoutPrivate />,
+                children: [
                     {
                         path: "/pokemons",
-                        index:true,
-                        element: <Pokemons />
-                    },
-                    {
-                        path: "/signin",
-                        index:true,
-                        element: <SignIn />
-                    },
-                    {
-                        path: "/login",
-                        index:true,
-                        element: <LogIn />
+                        element: <Pokemons />,
+                        errorElement:<Error/>
                     },
                     {
                         path: "/profile",
-                        index:true,
-                        element:<Perfil/>
+                        element: <Perfil />,
+                        errorElement:<Error/>
                     },
                     {
                         path: "/pokemon/:id",
-                        index:true,
-                        element: <PokemonData />
+                        element: <PokemonData />,
+                        errorElement:<Error/>
                     }
                 ]
             }
-            
         ]
     }
-])
+]);
 
 export default router;

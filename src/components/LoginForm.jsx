@@ -41,19 +41,22 @@ const LoginForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!validateForm()) return;
-
-        const users = Object.values(localStorage);
-        for (const user of users) {
-            const parsedUser = JSON.parse(user);
+    
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const userValue = localStorage.getItem(key);
+            const parsedUser = JSON.parse(userValue);
+    
             if (parsedUser.username === username && parsedUser.password === password) {
                 setUser(true);
                 login(parsedUser);
+                localStorage.setItem('currentUserKey', key);
                 navigate("/pokemons");
                 return;
             }
         }
-        setErrors({ LogIn: "Usuario no encontrado" });
     };
+    
 
     return (
         <div>

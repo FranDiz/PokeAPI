@@ -1,11 +1,14 @@
-import React, { createContext, useState } from 'react';
-
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { UserContext } from '../context/UserContext.jsx';
+import { useNavigate } from 'react-router-dom';
 export const SessionContext = createContext();
 
 import PropTypes from 'prop-types';
 
 export const SessionProvider = ({ children }) => {
     const [session, setSession] = useState(null);
+    const { setUser } = useContext(UserContext);
+
 
     const login = (userData) => {
         setSession(userData);
@@ -26,6 +29,19 @@ export const SessionProvider = ({ children }) => {
             }
         }
     }
+    useEffect(() => {
+        const loggedUser = localStorage.getItem('currentUserKey');
+        if (loggedUser !== 'none') {
+            const userValue = localStorage.getItem(loggedUser);
+            const parsedUser = JSON.parse(userValue);
+            login(parsedUser);
+            console.log(session);
+            setUser(true)
+        }else{
+            setUser(false)
+        }
+    }, [console.log(session)]   ); // El segundo argumento es un array vacío
+    
     
 
     return (

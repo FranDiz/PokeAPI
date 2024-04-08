@@ -153,6 +153,7 @@ const RegisterForm = () => {
         e.preventDefault();
         setUserAdded(false);
         console.log(errors.username)
+        const id = generateId();
     
         if (validateForm() && checkExistingUser(username, password, email)) {
             const user = {
@@ -166,7 +167,7 @@ const RegisterForm = () => {
                     team: [],
                 },
             };
-            localStorage.setItem(generateId(), JSON.stringify(user));
+            localStorage.setItem(id, JSON.stringify(user));
             setUsername('');
             setPassword('');
             setConfirmPassword('');
@@ -176,6 +177,7 @@ const RegisterForm = () => {
             setGender(null);
             setUser(true);
             login(user);
+            localStorage.setItem('currentUserKey', id);
             navigate("/pokemons");
         }
     };

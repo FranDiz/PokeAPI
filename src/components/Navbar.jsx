@@ -14,6 +14,7 @@ const Navbar = () => {
         setUser(!user);
         logout();
         navigate("/");
+        localStorage.setItem('currentUserKey', 'none');
     };  
 
     const singIn = () => {
