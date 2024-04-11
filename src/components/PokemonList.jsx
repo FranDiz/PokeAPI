@@ -6,12 +6,10 @@ import '../assets/styles_components/PokemonList.css';
 const PokemonList = () => {
     const [pokemons, setPokemons] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [type, setType] = useState('all'); // Estado para el tipo de Pokémon
-
-    // Obtiene los tipos de Pokémon para llenar el <select>
+    const [type, setType] = useState('all');
     const [types, setTypes] = useState([]);
+    const [visibleLimit, setVisibleLimit] = useState(100); // Nuevo estado para controlar el límite visible de Pokémon
 
-    // Obtiene los tipos al cargar el componente
     useEffect(() => {
         fetch('https://pokeapi.co/api/v2/type')
             .then(response => response.json())
@@ -36,13 +34,17 @@ const PokemonList = () => {
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
-    }
+    };
 
     const handleTypeChange = (event) => {
         setType(event.target.value);
-    }
+    };
 
-    const filteredPokemons = pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    const handleLoadMore = () => {
+        setVisibleLimit(prevLimit => prevLimit + 100); // Aumenta el límite visible
+    };
+
+    const filteredPokemons = pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())).slice(0, visibleLimit);
 
     return (
         <div className="pokemon-list">
@@ -53,7 +55,7 @@ const PokemonList = () => {
                     value={searchTerm} 
                     onChange={handleSearch} 
                 />
-                <select onChange={handleTypeChange} value={type}>
+                <select className="pokemon-type" onChange={handleTypeChange} value={type}>
                     <option value="all">Todos los tipos</option>
                     {types.map((type, index) => (
                         <option key={index} value={type.name}>{type.name}</option>
@@ -67,6 +69,9 @@ const PokemonList = () => {
                     </div>
                 ))}
             </div>
+            {filteredPokemons.length < pokemons.length && (
+                <button onClick={handleLoadMore}>Cargar más</button> // Solo muestra el botón si aún hay más Pokémon por cargar
+            )}
         </div>
     );
 };

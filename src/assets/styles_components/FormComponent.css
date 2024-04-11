@@ -38,3 +38,9 @@
     background-color: #ccc;
     cursor: not-allowed;
 }
+
+.error {
+    color: red;
+    margin-top: 5px;
+    font-size: 1em;
+}

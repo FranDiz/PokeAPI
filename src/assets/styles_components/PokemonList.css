@@ -42,3 +42,19 @@
 .load-more-btn {
     margin-top: 20px;
 }
+.pokemon-type {
+    background-color: #ffffff; 
+    color: #3d7dca; 
+    border: 2px solid #3d7dca; 
+    border-radius: 10px; 
+    padding: 5px 10px; 
+    font-family: 'Arial', sans-serif; 
+    font-size: 16px;
+    cursor: pointer; 
+    outline: none; 
+    margin: 10px; 
+  }
+  .pokemon-type:focus {
+    box-shadow: 0 0 0 2px #f2b807;
+  }
+  
