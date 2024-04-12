@@ -18,32 +18,29 @@ const ContactForm = () => {
 
     const handleAsuntoChange = (event) => {
         setAsunto(event.target.value);
-        if (event.target.value.trim() === '') setErrorAsunto(true);
-        else setErrorAsunto(false);
     };
 
     const handleCorreoChange = (event) => {
         setCorreo(event.target.value);
-        if (!validateEmail(event.target.value)) setErrorCorreo(true);
-        else setErrorCorreo(false);
     };
 
     const handleDescripcionChange = (event) => {
         setDescripcion(event.target.value);
-        if (event.target.value.trim() === '') setErrorDescripcion(true);
-        else setErrorDescripcion(false);
     };
 
     const onBlurCorreo = () => {
         if (!validateEmail(correo)) setErrorCorreo(true);
+        else setErrorCorreo(false);
     };
 
     const onBlurAsunto = () => {
         if (asunto.trim() === '') setErrorAsunto(true);
+        else setErrorAsunto(false);
     };
 
     const onBlurDescripcion = () => {
         if (descripcion.trim() === '') setErrorDescripcion(true);
+        else setErrorDescripcion(false);
     };
 
     const isFormValid = () => {
@@ -54,6 +51,7 @@ const ContactForm = () => {
         <form className="form-container">
             <label htmlFor="categoria">Categoría:
                 <select id="categoria" value={categoria} onChange={handleCategoriaChange}>
+                    <option value="">Selecciona una categoría</option>
                     <option value="Problemas técnicos">Problemas técnicos</option>
                     <option value="Problemas con el registro">Problemas con el registro</option>
                     <option value="Dudas sobre pokemons">Dudas sobre pokemons</option>
